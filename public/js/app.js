@@ -377,6 +377,99 @@
   }
 
   /* ==========================================
+     Playground — Emoji Shortcode Map
+     ========================================== */
+  const EMOJI_MAP = {
+    grinning:'😀',smiley:'😃',smile:'😄',grin:'😁',laughing:'😆',sweat_smile:'😅',
+    rofl:'🤣',joy:'😂',slightly_smiling_face:'🙂',wink:'😉',blush:'😊',innocent:'😇',
+    heart_eyes:'😍',kissing_heart:'😘',stuck_out_tongue_winking_eye:'😜',thinking:'🤔',
+    hugs:'🤗',sunglasses:'😎',star_struck:'🤩',smirk:'😏',cry:'😢',sob:'😭',
+    scream:'😱',rage:'😡',pleading_face:'🥺',sleeping:'😴',vomiting_face:'🤮',
+    clown_face:'🤡',skull:'💀',poop:'💩',ghost:'👻',alien:'👽',robot:'🤖',
+    smiling_face_with_three_hearts:'🥰',yum:'😋',stuck_out_tongue:'😛',
+    zipper_mouth_face:'🤐',raised_eyebrow:'🤨',neutral_face:'😐',expressionless:'😑',
+    no_mouth:'😶',rolling_eyes:'🙄',grimacing:'😬',lying_face:'🤥',relieved:'😌',
+    pensive:'😔',sleepy:'😪',drooling_face:'🤤',cold_sweat:'😰',disappointed:'😞',
+    worried:'😟',angry:'😠',cursing_face:'🤬',confused:'😕',flushed:'😳',
+    dizzy_face:'😵',exploding_head:'🤯',shushing_face:'🤫',mask:'😷',nerd_face:'🤓',
+    monocle_face:'🧐',partying_face:'🥳',woozy_face:'🥴',hot_face:'🥵',cold_face:'🥶',
+
+    thumbsup:'👍','+1':'👍',thumbsdown:'👎','-1':'👎',clap:'👏',raised_hands:'🙌',
+    handshake:'🤝',v:'✌️',crossed_fingers:'🤞',ok_hand:'👌',wave:'👋',muscle:'💪',
+    pray:'🙏',point_up:'☝️',point_up_2:'👆',point_down:'👇',point_left:'👈',
+    point_right:'👉',fist:'✊',raised_hand:'✋',middle_finger:'🖕',
+    writing_hand:'✍️',eyes:'👀',eye:'👁️',tongue:'👅',lips:'👄',
+
+    baby:'👶',boy:'👦',girl:'👧',man:'👨',woman:'👩',older_man:'👴',older_woman:'👵',
+    cop:'👮',construction_worker:'👷',guardsman:'💂',detective:'🕵️',
+    angel:'👼',santa:'🎅',princess:'👸',prince:'🤴',superhero:'🦸',
+
+    dog:'🐶',cat:'🐱',mouse:'🐭',rabbit:'🐰',fox_face:'🦊',bear:'🐻',panda_face:'🐼',
+    frog:'🐸',monkey_face:'🐵',see_no_evil:'🙈',hear_no_evil:'🙉',speak_no_evil:'🙊',
+    chicken:'🐔',penguin:'🐧',bird:'🐦',eagle:'🦅',duck:'🦆',owl:'🦉',bat:'🦇',
+    wolf:'🐺',horse:'🐴',unicorn:'🦄',bee:'🐝',bug:'🐛',butterfly:'🦋',snail:'🐌',
+    octopus:'🐙',fish:'🐟',dolphin:'🐬',whale:'🐳',shark:'🦈',turtle:'🐢',
+    snake:'🐍',dragon:'🐉',dinosaur:'🦕',crab:'🦀',spider:'🕷️',scorpion:'🦂',
+
+    cherry_blossom:'🌸',rose:'🌹',sunflower:'🌻',tulip:'🌷',seedling:'🌱',
+    evergreen_tree:'🌲',deciduous_tree:'🌳',palm_tree:'🌴',cactus:'🌵',
+    rainbow:'🌈',sunny:'☀️',cloud:'☁️',snowflake:'❄️',zap:'⚡',fire:'🔥',
+    droplet:'💧',ocean:'🌊',star:'⭐',star2:'🌟',crescent_moon:'🌙',
+    sun_with_face:'🌞',full_moon:'🌕',earth_africa:'🌍',earth_americas:'🌎',
+    earth_asia:'🌏',volcano:'🌋',milky_way:'🌌',
+
+    apple:'🍎',green_apple:'🍏',tangerine:'🍊',lemon:'🍋',watermelon:'🍉',
+    grapes:'🍇',strawberry:'🍓',peach:'🍑',cherry:'🍒',banana:'🍌',pineapple:'🍍',
+    pizza:'🍕',hamburger:'🍔',fries:'🍟',hotdog:'🌭',taco:'🌮',burrito:'🌯',
+    egg:'🥚',cake:'🍰',cookie:'🍪',chocolate_bar:'🍫',candy:'🍬',ice_cream:'🍨',
+    coffee:'☕',tea:'🍵',beer:'🍺',wine_glass:'🍷',cocktail:'🍸',cupcake:'🧁',
+
+    soccer:'⚽',basketball:'🏀',football:'🏈',baseball:'⚾',tennis:'🎾',
+    volleyball:'🏐',ping_pong:'🏓',badminton:'🏸',golf:'⛳',ski:'🎿',
+    video_game:'🎮',dart:'🎯',game_die:'🎲',trophy:'🏆',medal_sports:'🏅',
+    '1st_place_medal':'🥇','2nd_place_medal':'🥈','3rd_place_medal':'🥉',
+    circus_tent:'🎪',clapper:'🎬',musical_note:'🎵',notes:'🎶',
+    tada:'🎉',confetti_ball:'🎊',balloon:'🎈',gift:'🎁',sparkles:'✨',
+    art:'🎨',microphone:'🎤',headphones:'🎧',guitar:'🎸',drum:'🥁',
+
+    car:'🚗',taxi:'🚕',bus:'🚌',ambulance:'🚑',fire_engine:'🚒',police_car:'🚓',
+    truck:'🚚',bike:'🚲',rocket:'🚀',airplane:'✈️',helicopter:'🚁',
+    ship:'🚢',boat:'⛵',anchor:'⚓',house:'🏠',office:'🏢',hospital:'🏥',
+    school:'🏫',church:'⛪',mountain:'⛰️',camping:'🏕️',world_map:'🗺️',
+    statue_of_liberty:'🗽',japan:'🗾',
+
+    computer:'💻',iphone:'📱',keyboard:'⌨️',desktop_computer:'🖥️',printer:'🖨️',
+    bulb:'💡',camera:'📷',video_camera:'📹',key:'🔑',lock:'🔒',unlock:'🔓',
+    bell:'🔔',bookmark:'🔖',link:'🔗',memo:'📝',books:'📚',book:'📖',
+    package:'📦',postbox:'📮',email:'📧',envelope:'✉️',wrench:'🔧',hammer:'🔨',
+    gear:'⚙️',shield:'🛡️',bomb:'💣',hourglass:'⌛',alarm_clock:'⏰',
+    mag:'🔍',microscope:'🔬',telescope:'🔭',clipboard:'📋',pushpin:'📌',
+    paperclip:'📎',scissors:'✂️',pen:'🖊️',pencil2:'✏️',file_folder:'📁',
+    calendar:'📅',chart_with_upwards_trend:'📈',bar_chart:'📊',trophy:'🏆',
+
+    heart:'❤️',orange_heart:'🧡',yellow_heart:'💛',green_heart:'💚',blue_heart:'💙',
+    purple_heart:'💜',black_heart:'🖤',broken_heart:'💔',heavy_heart_exclamation:'❣️',
+    '100':'💯',white_check_mark:'✅',x:'❌',o:'⭕',exclamation:'❗',question:'❓',
+    warning:'⚠️',no_entry_sign:'🚫',recycle:'♻️',red_circle:'🔴',orange_circle:'🟠',
+    green_circle:'🟢',blue_circle:'🔵',white_circle:'⚪',black_circle:'⚫',
+    arrow_up:'⬆️',arrow_down:'⬇️',arrow_left:'⬅️',arrow_right:'➡️',
+    arrow_upper_right:'↗️',arrow_lower_right:'↘️',
+    information_source:'ℹ️',heavy_check_mark:'✔️',heavy_multiplication_x:'✖️',
+    heavy_plus_sign:'➕',heavy_minus_sign:'➖',wavy_dash:'〰️',
+    copyright:'©️',registered:'®️',tm:'™️',
+
+    white_flag:'🏳️',black_flag:'🏴',triangular_flag_on_post:'🚩',
+    cn:'🇨🇳',us:'🇺🇸',jp:'🇯🇵',gb:'🇬🇧',kr:'🇰🇷',fr:'🇫🇷',de:'🇩🇪',
+    it:'🇮🇹',es:'🇪🇸',ru:'🇷🇺',br:'🇧🇷',au:'🇦🇺',ca:'🇨🇦',in:'🇮🇳',
+  };
+
+  function replaceEmojiShortcodes(text) {
+    return text.replace(/:([a-zA-Z0-9_+-]+):/g, (match, code) => {
+      return EMOJI_MAP[code] || match;
+    });
+  }
+
+  /* ==========================================
      Playground — Render
      ========================================== */
   function renderPlayground() {
@@ -390,8 +483,10 @@
       };
       marked.setOptions({ breaks: true, gfm: true, renderer });
 
-      const preprocessed = preprocessContainers(playgroundInput.value);
-      playgroundOutput.innerHTML = marked.parse(preprocessed);
+      let text = playgroundInput.value;
+      text = replaceEmojiShortcodes(text);
+      text = preprocessContainers(text);
+      playgroundOutput.innerHTML = marked.parse(text);
     } catch (e) { playgroundOutput.innerHTML = '<p style="color:red">渲染出错: ' + e.message + '</p>'; }
   }
 

@@ -858,6 +858,75 @@ body {
 .md-tab-panel > *:first-child { margin-top:0; }
 .md-tab-panel > *:last-child { margin-bottom:0; }
 
+/* Playground — Footnotes */
+.md-fn-ref a {
+  color:var(--accent); text-decoration:none; font-weight:600;
+}
+.md-fn-sep {
+  border:none; border-top:1px solid var(--border); margin:1.5em 0 .75em;
+}
+.md-footnotes {
+  font-size:.85em; color:var(--text-secondary);
+}
+.md-footnotes ol { padding-left:1.4em; }
+.md-footnotes li { margin:.3em 0; }
+.md-footnotes a { color:var(--accent); text-decoration:none; }
+
+/* Playground — Definition Lists */
+.md-deflist { margin:.5em 0; }
+.md-deflist dt {
+  font-weight:600; margin-top:.6em;
+}
+.md-deflist dd {
+  margin-left:1.5em; color:var(--text-secondary); margin-top:.15em;
+}
+
+/* Playground — Abbreviations */
+abbr[title] {
+  text-decoration:underline dotted var(--accent);
+  cursor:help; font-weight:500;
+}
+
+/* Playground — GitHub Alerts */
+.md-alert {
+  padding:.65em .85em; border-radius:8px; margin:.5em 0;
+  border-left:4px solid; font-size:.9em;
+}
+.md-alert-title { font-weight:600; margin-bottom:.25em; }
+.md-alert-note { background:var(--callout-info-bg); border-color:#3b82f6; }
+.md-alert-tip { background:var(--callout-tip-bg); border-color:#22c55e; }
+.md-alert-important { background:#f3e8ff; border-color:#9333ea; }
+[data-theme="dark"] .md-alert-important { background:#1a0a2e; }
+.md-alert-warning { background:var(--callout-warning-bg); border-color:#f59e0b; }
+.md-alert-caution { background:#fef2f2; border-color:#ef4444; }
+[data-theme="dark"] .md-alert-caution { background:#2a0a0a; }
+
+/* Playground — TOC */
+.md-toc {
+  background:var(--bg-tertiary); border:1px solid var(--border);
+  border-radius:8px; padding:.75em 1em; margin:.5em 0;
+}
+.md-toc-title { font-weight:600; margin-bottom:.4em; font-size:.95em; }
+.md-toc ul { list-style:none; padding:0; margin:0; }
+.md-toc li { margin:.2em 0; }
+.md-toc a { color:var(--accent); text-decoration:none; font-size:.88em; }
+.md-toc a:hover { text-decoration:underline; }
+
+/* Playground — Mermaid */
+.md-mermaid {
+  background:var(--bg-tertiary); border-radius:8px; padding:1em;
+  margin:.5em 0; text-align:center; overflow-x:auto;
+}
+.md-mermaid svg { max-width:100%; }
+
+/* Playground — Highlight Mark */
+#playgroundOutput mark {
+  background:#fef08a; color:inherit; padding:.05em .2em; border-radius:3px;
+}
+[data-theme="dark"] #playgroundOutput mark {
+  background:#854d0e; color:#fef9c3;
+}
+
 /* ============================================
    Highlight.js Code Blocks
    ============================================ */

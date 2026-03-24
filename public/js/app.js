@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  if (typeof mermaid !== 'undefined') {
+    mermaid.initialize({ startOnLoad: false, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });
+  }
+
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
@@ -281,14 +285,10 @@
   });
 
   /* ==========================================
-     Playground — Container & Tabs Preprocessor
+     Playground — Utility
      ========================================== */
-  const CONTAINER_ICONS = { tip:'💡', warning:'⚠️', danger:'🔴', info:'ℹ️', note:'📝', success:'✅', details:'📂' };
-  const CONTAINER_TYPES = new Set(Object.keys(CONTAINER_ICONS));
-
-  function parseMarkdownInner(text) {
-    if (typeof marked === 'undefined') return text;
-    return marked.parse(text);
+  function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
   function highlightCode(text, lang) {
@@ -296,8 +296,211 @@
       return hljs.highlight(text, { language: lang }).value;
     }
     if (typeof hljs !== 'undefined') return hljs.highlightAuto(text).value;
-    return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return escHtml(text);
   }
+
+  function parseMarkdownInner(text) {
+    if (typeof marked === 'undefined') return text;
+    return marked.parse(text);
+  }
+
+  /* ==========================================
+     Playground — Code Block Protection
+     ========================================== */
+  function protectCodeBlocks(text) {
+    const saved = [];
+    let idx = 0;
+    text = text.replace(/(`{3,})([^\n]*)\n([\s\S]*?)\1/g, (m) => {
+      const t = '\x00CB' + (idx++) + '\x00';
+      saved.push({ t, m });
+      return t;
+    });
+    text = text.replace(/`([^`\n]+)`/g, (m) => {
+      const t = '\x00IC' + (idx++) + '\x00';
+      saved.push({ t, m });
+      return t;
+    });
+    return { text, saved };
+  }
+  function restoreCodeBlocks(text, saved) {
+    saved.forEach(({ t, m }) => { text = text.split(t).join(m); });
+    return text;
+  }
+
+  /* ==========================================
+     Playground — Inline Syntax Extensions
+     ==highlight==  ^superscript^  ~subscript~
+     ========================================== */
+  function preprocessInlineSyntax(text) {
+    const { text: safe, saved } = protectCodeBlocks(text);
+    let out = safe;
+    out = out.replace(/==(?!\s)([^=\n]+?)(?<!\s)==/g, '<mark>$1</mark>');
+    out = out.replace(/\^(?!\s)([^\^\n]+?)(?<!\s)\^/g, '<sup>$1</sup>');
+    out = out.replace(/(?<!\~)\~(?!\~)(?!\s)([^\~\n]+?)(?<!\s)(?<!\~)\~(?!\~)/g, '<sub>$1</sub>');
+    return restoreCodeBlocks(out, saved);
+  }
+
+  /* ==========================================
+     Playground — Footnotes [^1]
+     ========================================== */
+  function preprocessFootnotes(text) {
+    const defs = {};
+    let counter = 0;
+    const cleaned = text.replace(/^\[\^([^\]]+)\]:\s*(.+)$/gm, (_, id, content) => {
+      counter++;
+      defs[id] = { idx: counter, content: content.trim() };
+      return '';
+    });
+    if (counter === 0) return text;
+    let result = cleaned.replace(/\[\^([^\]]+)\]/g, (match, id) => {
+      const def = defs[id];
+      if (!def) return match;
+      return '<sup class="md-fn-ref"><a href="#fn-' + id + '" id="fnref-' + id + '">[' + def.idx + ']</a></sup>';
+    });
+    if (counter > 0) {
+      result += '\n<hr class="md-fn-sep"><section class="md-footnotes"><ol>';
+      Object.entries(defs).forEach(([id, d]) => {
+        result += '<li id="fn-' + id + '">' + d.content + ' <a href="#fnref-' + id + '">↩</a></li>';
+      });
+      result += '</ol></section>';
+    }
+    return result;
+  }
+
+  /* ==========================================
+     Playground — Definition Lists
+     ========================================== */
+  function preprocessDefinitionLists(text) {
+    const lines = text.split('\n');
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+      if (i + 1 < lines.length && /^:\s+/.test(lines[i + 1]) && lines[i].trim() !== '') {
+        let html = '<dl class="md-deflist">';
+        while (i < lines.length) {
+          if (lines[i].trim() === '' && (i + 1 >= lines.length || !/^:\s+/.test(lines[i + 1]))) break;
+          if (lines[i].trim() === '') { i++; continue; }
+          if (/^:\s+/.test(lines[i])) {
+            html += '<dd>' + lines[i].replace(/^:\s+/, '') + '</dd>';
+          } else {
+            html += '<dt>' + lines[i].trim() + '</dt>';
+          }
+          i++;
+        }
+        html += '</dl>';
+        out.push(html);
+      } else {
+        out.push(lines[i]);
+        i++;
+      }
+    }
+    return out.join('\n');
+  }
+
+  /* ==========================================
+     Playground — Abbreviations *[ABBR]: Full
+     ========================================== */
+  function preprocessAbbreviations(text) {
+    const abbrs = {};
+    const cleaned = text.replace(/^\*\[([^\]]+)\]:\s*(.+)$/gm, (_, abbr, full) => {
+      abbrs[abbr] = full.trim();
+      return '';
+    });
+    if (Object.keys(abbrs).length === 0) return text;
+    return { text: cleaned, abbrs };
+  }
+  function applyAbbreviations(html, abbrs) {
+    if (!abbrs || Object.keys(abbrs).length === 0) return html;
+    Object.entries(abbrs).forEach(([abbr, full]) => {
+      const re = new RegExp('\\b(' + abbr.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')\\b', 'g');
+      html = html.replace(re, '<abbr title="' + escHtml(full) + '">$1</abbr>');
+    });
+    return html;
+  }
+
+  /* ==========================================
+     Playground — Math (KaTeX)
+     ========================================== */
+  let mathPlaceholders = [];
+  function preprocessMath(text) {
+    mathPlaceholders = [];
+    const { text: safe, saved } = protectCodeBlocks(text);
+    let out = safe;
+    let idx = 0;
+    out = out.replace(/\$\$([^$]+?)\$\$/gs, (_, math) => {
+      const token = '%%MATHBLOCK' + (idx++) + '%%';
+      try {
+        mathPlaceholders.push({ token, html: katex.renderToString(math.trim(), { displayMode: true, throwOnError: false }) });
+      } catch(e) {
+        mathPlaceholders.push({ token, html: '<span style="color:red">' + escHtml(e.message) + '</span>' });
+      }
+      return token;
+    });
+    out = out.replace(/(?<!\$)\$(?!\$)([^$\n]+?)(?<!\$)\$(?!\$)/g, (_, math) => {
+      const token = '%%MATHINLINE' + (idx++) + '%%';
+      try {
+        mathPlaceholders.push({ token, html: katex.renderToString(math.trim(), { displayMode: false, throwOnError: false }) });
+      } catch(e) {
+        mathPlaceholders.push({ token, html: '<span style="color:red">' + escHtml(e.message) + '</span>' });
+      }
+      return token;
+    });
+    return restoreCodeBlocks(out, saved);
+  }
+  function restoreMath(html) {
+    mathPlaceholders.forEach(({ token, html: rendered }) => {
+      html = html.split(token).join(rendered);
+    });
+    return html;
+  }
+
+  /* ==========================================
+     Playground — GitHub Alerts
+     > [!NOTE] / [!TIP] / [!IMPORTANT] / [!WARNING] / [!CAUTION]
+     ========================================== */
+  const ALERT_ICONS = { NOTE:'ℹ️', TIP:'💡', IMPORTANT:'❗', WARNING:'⚠️', CAUTION:'🔴' };
+  function preprocessAlerts(text) {
+    return text.replace(/^(> *)\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*\n((?:>.*\n?)*)/gm, (_, _q, type, body) => {
+      const clean = body.replace(/^>\s?/gm, '').trim();
+      const icon = ALERT_ICONS[type] || '';
+      const parsed = parseMarkdownInner(clean);
+      return '<div class="md-alert md-alert-' + type.toLowerCase() + '">'
+        + '<div class="md-alert-title">' + icon + ' ' + type + '</div>'
+        + '<div class="md-alert-body">' + parsed + '</div></div>\n';
+    });
+  }
+
+  /* ==========================================
+     Playground — TOC  [TOC]
+     ========================================== */
+  function generateTOC(html) {
+    const re = /<h([1-6])[^>]*id="([^"]*)"[^>]*>(.*?)<\/h\1>/gi;
+    const headings = [];
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      headings.push({ level: +m[1], id: m[2], text: m[3].replace(/<[^>]+>/g, '') });
+    }
+    if (headings.length === 0) {
+      const re2 = /<h([1-6])[^>]*>(.*?)<\/h\1>/gi;
+      while ((m = re2.exec(html)) !== null) {
+        const slug = m[2].replace(/<[^>]+>/g, '').trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w\u4e00-\u9fff-]/g, '');
+        headings.push({ level: +m[1], id: slug, text: m[2].replace(/<[^>]+>/g, '') });
+      }
+    }
+    if (headings.length === 0) return '';
+    let toc = '<nav class="md-toc"><div class="md-toc-title">📑 目录</div><ul>';
+    headings.forEach(h => {
+      toc += '<li style="margin-left:' + ((h.level - 1) * 1) + 'em"><a href="#' + h.id + '">' + h.text + '</a></li>';
+    });
+    toc += '</ul></nav>';
+    return toc;
+  }
+
+  /* ==========================================
+     Playground — Container & Tabs Preprocessor
+     ========================================== */
+  const CONTAINER_ICONS = { tip:'💡', warning:'⚠️', danger:'🔴', info:'ℹ️', note:'📝', success:'✅', details:'📂' };
+  const CONTAINER_TYPES = new Set(Object.keys(CONTAINER_ICONS));
 
   function preprocessContainers(mdText) {
     const lines = mdText.split('\n');
@@ -464,19 +667,29 @@
   };
 
   function replaceEmojiShortcodes(text) {
-    return text.replace(/:([a-zA-Z0-9_+-]+):/g, (match, code) => {
+    const { text: safe, saved } = protectCodeBlocks(text);
+    const out = safe.replace(/:([a-zA-Z0-9_+-]+):/g, (match, code) => {
       return EMOJI_MAP[code] || match;
     });
+    return restoreCodeBlocks(out, saved);
   }
 
   /* ==========================================
      Playground — Render
      ========================================== */
+  let mermaidCounter = 0;
+  let renderSeq = 0;
   function renderPlayground() {
+    mermaidCounter = 0;
+    renderSeq++;
     if (!playgroundInput || !playgroundOutput || typeof marked === 'undefined') return;
     try {
       const renderer = new marked.Renderer();
       renderer.code = function({ text, lang }) {
+        if (lang === 'mermaid') {
+          const id = 'mmd-r' + renderSeq + '-' + (mermaidCounter++);
+          return '<div class="md-mermaid" id="' + id + '">' + escHtml(text) + '</div>';
+        }
         const highlighted = highlightCode(text, lang);
         const langLabel = lang ? '<div class="code-lang-label">' + lang + '</div>' : '';
         return '<pre class="hljs-pre">' + langLabel + '<code class="hljs">' + highlighted + '</code></pre>';
@@ -485,8 +698,48 @@
 
       let text = playgroundInput.value;
       text = replaceEmojiShortcodes(text);
+
+      const abbrResult = preprocessAbbreviations(text);
+      let abbrs = null;
+      if (abbrResult && abbrResult.abbrs) { text = abbrResult.text; abbrs = abbrResult.abbrs; }
+
+      const hasMath = typeof katex !== 'undefined' && (/\$\$.+?\$\$/s.test(text) || /\$[^$\n]+?\$/.test(text));
+      if (hasMath) text = preprocessMath(text);
+
+      text = preprocessAlerts(text);
+      text = preprocessFootnotes(text);
+      text = preprocessDefinitionLists(text);
+      text = preprocessInlineSyntax(text);
       text = preprocessContainers(text);
-      playgroundOutput.innerHTML = marked.parse(text);
+
+      const hasToc = /\[TOC\]/i.test(text);
+      text = text.replace(/\[TOC\]/gi, '%%TOC_PLACEHOLDER%%');
+
+      let html = marked.parse(text);
+
+      if (hasMath) html = restoreMath(html);
+      if (abbrs) html = applyAbbreviations(html, abbrs);
+      if (hasToc) {
+        const toc = generateTOC(html);
+        html = html.split('%%TOC_PLACEHOLDER%%').join(toc || '<p><em>（未检测到标题）</em></p>');
+      }
+
+      playgroundOutput.innerHTML = html;
+
+      if (typeof mermaid !== 'undefined') {
+        const mmdEls = playgroundOutput.querySelectorAll('.md-mermaid');
+        const seq = renderSeq;
+        mmdEls.forEach(async (el, i) => {
+          if (seq !== renderSeq) return;
+          try {
+            const rid = 'mmd-svg-' + seq + '-' + i;
+            const { svg } = await mermaid.render(rid, el.textContent);
+            if (seq === renderSeq) el.innerHTML = svg;
+          } catch (e) {
+            if (seq === renderSeq) el.innerHTML = '<p style="color:#ef4444;font-size:.85em">Mermaid 渲染失败: ' + escHtml(e.message) + '</p>';
+          }
+        });
+      }
     } catch (e) { playgroundOutput.innerHTML = '<p style="color:red">渲染出错: ' + e.message + '</p>'; }
   }
 

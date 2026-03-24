@@ -530,10 +530,206 @@ def greet(name):
                 <div class="example-render"><div class="rendered">
                   <p>直接输入：🎉 🚀 ❤️ ✅</p>
                   <p>简码渲染：<br>😄 ❤️ 👍<br>🚀 ⭐ ⚠️<br>✅ ❌</p>
-                  <p style="font-size:.85em;color:var(--text-tertiary)">完整列表可参考 <a href="#" class="demo-link">emoji-cheat-sheet</a></p>
                 </div></div>
               </div>
             </div>
+
+            <h3 style="padding-left:1rem;padding-right:1rem;margin:.75rem 0 .5rem;font-size:1rem;">Emoji 速查表</h3>
+            <p style="font-size:.85em;color:var(--text-tertiary)">点击分类筛选，点击编号可复制。完整列表 1800+ 个，这里列出最常用的。</p>
+            <div class="emoji-filter-bar" id="emojiFilterBar">
+              <button class="emoji-filter-btn active" data-cat="all">全部</button>
+              <button class="emoji-filter-btn" data-cat="face">表情</button>
+              <button class="emoji-filter-btn" data-cat="gesture">手势</button>
+              <button class="emoji-filter-btn" data-cat="people">人物</button>
+              <button class="emoji-filter-btn" data-cat="nature">自然</button>
+              <button class="emoji-filter-btn" data-cat="food">食物</button>
+              <button class="emoji-filter-btn" data-cat="activity">活动</button>
+              <button class="emoji-filter-btn" data-cat="travel">旅行</button>
+              <button class="emoji-filter-btn" data-cat="object">物品</button>
+              <button class="emoji-filter-btn" data-cat="symbol">符号</button>
+              <button class="emoji-filter-btn" data-cat="flag">旗帜</button>
+            </div>
+            <div class="emoji-grid" id="emojiGrid">
+              <!-- 表情 -->
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😀</span><code class="emoji-code">:grinning:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😃</span><code class="emoji-code">:smiley:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😄</span><code class="emoji-code">:smile:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😁</span><code class="emoji-code">:grin:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😆</span><code class="emoji-code">:laughing:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😅</span><code class="emoji-code">:sweat_smile:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤣</span><code class="emoji-code">:rofl:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😂</span><code class="emoji-code">:joy:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🙂</span><code class="emoji-code">:slightly_smiling_face:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😉</span><code class="emoji-code">:wink:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😊</span><code class="emoji-code">:blush:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😇</span><code class="emoji-code">:innocent:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🥰</span><code class="emoji-code">:smiling_face_with_three_hearts:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😍</span><code class="emoji-code">:heart_eyes:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😘</span><code class="emoji-code">:kissing_heart:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😜</span><code class="emoji-code">:stuck_out_tongue_winking_eye:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤔</span><code class="emoji-code">:thinking:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤗</span><code class="emoji-code">:hugs:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😎</span><code class="emoji-code">:sunglasses:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤩</span><code class="emoji-code">:star_struck:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😏</span><code class="emoji-code">:smirk:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😢</span><code class="emoji-code">:cry:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😭</span><code class="emoji-code">:sob:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😱</span><code class="emoji-code">:scream:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😡</span><code class="emoji-code">:rage:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🥺</span><code class="emoji-code">:pleading_face:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">😴</span><code class="emoji-code">:sleeping:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤮</span><code class="emoji-code">:vomiting_face:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">🤡</span><code class="emoji-code">:clown_face:</code></div>
+              <div class="emoji-item" data-cat="face"><span class="emoji-char">💀</span><code class="emoji-code">:skull:</code></div>
+              <!-- 手势 -->
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👍</span><code class="emoji-code">:thumbsup:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👎</span><code class="emoji-code">:thumbsdown:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👏</span><code class="emoji-code">:clap:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">🙌</span><code class="emoji-code">:raised_hands:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">🤝</span><code class="emoji-code">:handshake:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">✌️</span><code class="emoji-code">:v:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">🤞</span><code class="emoji-code">:crossed_fingers:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👌</span><code class="emoji-code">:ok_hand:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👋</span><code class="emoji-code">:wave:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">💪</span><code class="emoji-code">:muscle:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">🙏</span><code class="emoji-code">:pray:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">☝️</span><code class="emoji-code">:point_up:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👆</span><code class="emoji-code">:point_up_2:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👇</span><code class="emoji-code">:point_down:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👈</span><code class="emoji-code">:point_left:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">👉</span><code class="emoji-code">:point_right:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">✊</span><code class="emoji-code">:fist:</code></div>
+              <div class="emoji-item" data-cat="gesture"><span class="emoji-char">✋</span><code class="emoji-code">:raised_hand:</code></div>
+              <!-- 人物 -->
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👶</span><code class="emoji-code">:baby:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👦</span><code class="emoji-code">:boy:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👧</span><code class="emoji-code">:girl:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👨</span><code class="emoji-code">:man:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👩</span><code class="emoji-code">:woman:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👴</span><code class="emoji-code">:older_man:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👵</span><code class="emoji-code">:older_woman:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👮</span><code class="emoji-code">:cop:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👷</span><code class="emoji-code">:construction_worker:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">💂</span><code class="emoji-code">:guardsman:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">🕵️</span><code class="emoji-code">:detective:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👻</span><code class="emoji-code">:ghost:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">👽</span><code class="emoji-code">:alien:</code></div>
+              <div class="emoji-item" data-cat="people"><span class="emoji-char">🤖</span><code class="emoji-code">:robot:</code></div>
+              <!-- 自然 -->
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐶</span><code class="emoji-code">:dog:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐱</span><code class="emoji-code">:cat:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐭</span><code class="emoji-code">:mouse:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐰</span><code class="emoji-code">:rabbit:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🦊</span><code class="emoji-code">:fox_face:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐻</span><code class="emoji-code">:bear:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐼</span><code class="emoji-code">:panda_face:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐸</span><code class="emoji-code">:frog:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐟</span><code class="emoji-code">:fish:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🐬</span><code class="emoji-code">:dolphin:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🦋</span><code class="emoji-code">:butterfly:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌸</span><code class="emoji-code">:cherry_blossom:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌹</span><code class="emoji-code">:rose:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌻</span><code class="emoji-code">:sunflower:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌲</span><code class="emoji-code">:evergreen_tree:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌈</span><code class="emoji-code">:rainbow:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">☀️</span><code class="emoji-code">:sunny:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🌙</span><code class="emoji-code">:crescent_moon:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">⭐</span><code class="emoji-code">:star:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">🔥</span><code class="emoji-code">:fire:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">💧</span><code class="emoji-code">:droplet:</code></div>
+              <div class="emoji-item" data-cat="nature"><span class="emoji-char">❄️</span><code class="emoji-code">:snowflake:</code></div>
+              <!-- 食物 -->
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍎</span><code class="emoji-code">:apple:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍊</span><code class="emoji-code">:tangerine:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍋</span><code class="emoji-code">:lemon:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍉</span><code class="emoji-code">:watermelon:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍇</span><code class="emoji-code">:grapes:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍓</span><code class="emoji-code">:strawberry:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍕</span><code class="emoji-code">:pizza:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍔</span><code class="emoji-code">:hamburger:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍟</span><code class="emoji-code">:fries:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍰</span><code class="emoji-code">:cake:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">☕</span><code class="emoji-code">:coffee:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍺</span><code class="emoji-code">:beer:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🍷</span><code class="emoji-code">:wine_glass:</code></div>
+              <div class="emoji-item" data-cat="food"><span class="emoji-char">🧁</span><code class="emoji-code">:cupcake:</code></div>
+              <!-- 活动 -->
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">⚽</span><code class="emoji-code">:soccer:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🏀</span><code class="emoji-code">:basketball:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎮</span><code class="emoji-code">:video_game:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎯</span><code class="emoji-code">:dart:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎲</span><code class="emoji-code">:game_die:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🏆</span><code class="emoji-code">:trophy:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🥇</span><code class="emoji-code">:1st_place_medal:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎪</span><code class="emoji-code">:circus_tent:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎬</span><code class="emoji-code">:clapper:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎵</span><code class="emoji-code">:musical_note:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎉</span><code class="emoji-code">:tada:</code></div>
+              <div class="emoji-item" data-cat="activity"><span class="emoji-char">🎊</span><code class="emoji-code">:confetti_ball:</code></div>
+              <!-- 旅行 -->
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🚗</span><code class="emoji-code">:car:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🚕</span><code class="emoji-code">:taxi:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🚀</span><code class="emoji-code">:rocket:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">✈️</span><code class="emoji-code">:airplane:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🚢</span><code class="emoji-code">:ship:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🏠</span><code class="emoji-code">:house:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🏢</span><code class="emoji-code">:office:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🏥</span><code class="emoji-code">:hospital:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🏫</span><code class="emoji-code">:school:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">⛰️</span><code class="emoji-code">:mountain:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🌍</span><code class="emoji-code">:earth_africa:</code></div>
+              <div class="emoji-item" data-cat="travel"><span class="emoji-char">🗺️</span><code class="emoji-code">:world_map:</code></div>
+              <!-- 物品 -->
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">💻</span><code class="emoji-code">:computer:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📱</span><code class="emoji-code">:iphone:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">⌨️</span><code class="emoji-code">:keyboard:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🖥️</span><code class="emoji-code">:desktop_computer:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">💡</span><code class="emoji-code">:bulb:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📷</span><code class="emoji-code">:camera:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🔑</span><code class="emoji-code">:key:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🔒</span><code class="emoji-code">:lock:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📝</span><code class="emoji-code">:memo:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📚</span><code class="emoji-code">:books:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📦</span><code class="emoji-code">:package:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">📮</span><code class="emoji-code">:postbox:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🔧</span><code class="emoji-code">:wrench:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🔨</span><code class="emoji-code">:hammer:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">⚙️</span><code class="emoji-code">:gear:</code></div>
+              <div class="emoji-item" data-cat="object"><span class="emoji-char">🎁</span><code class="emoji-code">:gift:</code></div>
+              <!-- 符号 -->
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">❤️</span><code class="emoji-code">:heart:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">💔</span><code class="emoji-code">:broken_heart:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">💯</span><code class="emoji-code">:100:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">✅</span><code class="emoji-code">:white_check_mark:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">❌</span><code class="emoji-code">:x:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">⭕</span><code class="emoji-code">:o:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">❗</span><code class="emoji-code">:exclamation:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">❓</span><code class="emoji-code">:question:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">⚠️</span><code class="emoji-code">:warning:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">🚫</span><code class="emoji-code">:no_entry_sign:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">♻️</span><code class="emoji-code">:recycle:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">🔴</span><code class="emoji-code">:red_circle:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">🟢</span><code class="emoji-code">:green_circle:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">🔵</span><code class="emoji-code">:blue_circle:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">⬆️</span><code class="emoji-code">:arrow_up:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">⬇️</span><code class="emoji-code">:arrow_down:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">➡️</span><code class="emoji-code">:arrow_right:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">⬅️</span><code class="emoji-code">:arrow_left:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">ℹ️</span><code class="emoji-code">:information_source:</code></div>
+              <div class="emoji-item" data-cat="symbol"><span class="emoji-char">🔗</span><code class="emoji-code">:link:</code></div>
+              <!-- 旗帜 -->
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🏳️</span><code class="emoji-code">:white_flag:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🏴</span><code class="emoji-code">:black_flag:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🚩</span><code class="emoji-code">:triangular_flag_on_post:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇨🇳</span><code class="emoji-code">:cn:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇺🇸</span><code class="emoji-code">:us:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇯🇵</span><code class="emoji-code">:jp:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇬🇧</span><code class="emoji-code">:gb:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇰🇷</span><code class="emoji-code">:kr:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇫🇷</span><code class="emoji-code">:fr:</code></div>
+              <div class="emoji-item" data-cat="flag"><span class="emoji-char">🇩🇪</span><code class="emoji-code">:de:</code></div>
+            </div>
+            <div class="emoji-copy-toast" id="emojiToast">已复制!</div>
           </div>
         </div>
 

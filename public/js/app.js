@@ -452,4 +452,39 @@
     }
   }
   handleHash();
+
+  /* ==========================================
+     Emoji Grid: Filter & Copy
+     ========================================== */
+  const emojiFilterBar = $('#emojiFilterBar');
+  const emojiGrid = $('#emojiGrid');
+  const emojiToast = $('#emojiToast');
+
+  if (emojiFilterBar) {
+    emojiFilterBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.emoji-filter-btn');
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      emojiFilterBar.querySelectorAll('.emoji-filter-btn').forEach((b) => b.classList.toggle('active', b === btn));
+      emojiGrid.querySelectorAll('.emoji-item').forEach((item) => {
+        item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
+      });
+    });
+  }
+
+  if (emojiGrid) {
+    emojiGrid.addEventListener('click', (e) => {
+      const item = e.target.closest('.emoji-item');
+      if (!item) return;
+      const code = item.querySelector('.emoji-code');
+      if (!code) return;
+      const text = code.textContent;
+      navigator.clipboard.writeText(text).catch(() => {});
+      if (emojiToast) {
+        emojiToast.textContent = '已复制 ' + text;
+        emojiToast.classList.add('show');
+        setTimeout(() => emojiToast.classList.remove('show'), 1500);
+      }
+    });
+  }
 })();

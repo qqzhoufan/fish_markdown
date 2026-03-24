@@ -1,0 +1,14 @@
+{
+  "name": "fish-markdown",
+  "version": "1.0.0",
+  "private": true,
+  "description": "一个美观的 Markdown 语法教程网站，支持日/夜主题切换，可部署在 Cloudflare Workers 上",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev --local"
+  },
+  "devDependencies": {
+    "wrangler": "^3.99.0"
+  }
+}

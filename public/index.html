@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fish Markdown - Markdown 语法完全教程</title>
+  <meta name="description" content="最全面的 Markdown 语法教程，涵盖基础语法、扩展语法和高级技巧，配有实时练习场。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐟</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" id="hljs-theme" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- 头部 -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">🐟</span>
+        <span class="logo-text">Fish Markdown</span>
+      </a>
+      <div class="header-actions">
+        <div class="search-box" id="searchBox">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" placeholder="搜索语法... ( / )" autocomplete="off">
+          <kbd class="search-kbd">/</kbd>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+          <svg class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 侧边栏 -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <!-- 入门 -->
+      <div class="sidebar-group" data-for-tab="intro">
+        <div class="nav-group-title">快速入门</div>
+        <a href="#intro-what" class="nav-link" data-section="intro-what">Markdown 简介</a>
+      </div>
+      <!-- 基础语法 -->
+      <div class="sidebar-group" data-for-tab="basic">
+        <div class="nav-group-title">基础语法</div>
+        <a href="#headings" class="nav-link" data-section="headings">标题</a>
+        <a href="#paragraphs" class="nav-link" data-section="paragraphs">段落与换行</a>
+        <a href="#emphasis" class="nav-link" data-section="emphasis">粗体与斜体</a>
+        <a href="#blockquotes" class="nav-link" data-section="blockquotes">引用</a>
+        <a href="#lists" class="nav-link" data-section="lists">列表</a>
+        <a href="#code" class="nav-link" data-section="code">代码</a>
+        <a href="#links" class="nav-link" data-section="links">链接</a>
+        <a href="#images" class="nav-link" data-section="images">图片</a>
+        <a href="#hr" class="nav-link" data-section="hr">分割线</a>
+      </div>
+      <!-- 扩展语法 -->
+      <div class="sidebar-group" data-for-tab="extended">
+        <div class="nav-group-title">扩展语法</div>
+        <a href="#tables" class="nav-link" data-section="tables">表格</a>
+        <a href="#tasklists" class="nav-link" data-section="tasklists">任务列表</a>
+        <a href="#strikethrough" class="nav-link" data-section="strikethrough">删除线</a>
+        <a href="#footnotes" class="nav-link" data-section="footnotes">脚注</a>
+        <a href="#autolinks" class="nav-link" data-section="autolinks">自动链接</a>
+        <a href="#emoji" class="nav-link" data-section="emoji">Emoji 表情</a>
+        <a href="#highlight" class="nav-link" data-section="highlight">高亮标记</a>
+        <a href="#sup-sub" class="nav-link" data-section="sup-sub">上标与下标</a>
+        <a href="#deflist" class="nav-link" data-section="deflist">定义列表</a>
+        <a href="#abbreviation" class="nav-link" data-section="abbreviation">缩写</a>
+        <a href="#comments" class="nav-link" data-section="comments">注释</a>
+      </div>
+      <!-- 高级技巧 -->
+      <div class="sidebar-group" data-for-tab="advanced">
+        <div class="nav-group-title">高级技巧</div>
+        <a href="#escape" class="nav-link" data-section="escape">转义字符</a>
+        <a href="#html-in-md" class="nav-link" data-section="html-in-md">HTML 混用</a>
+        <a href="#math" class="nav-link" data-section="math">数学公式</a>
+        <a href="#toc" class="nav-link" data-section="toc">目录生成</a>
+        <a href="#anchors" class="nav-link" data-section="anchors">锚点跳转</a>
+        <a href="#alerts" class="nav-link" data-section="alerts">提示框 (Alerts)</a>
+        <a href="#mermaid" class="nav-link" data-section="mermaid">Mermaid 图表</a>
+        <a href="#containers" class="nav-link" data-section="containers">容器指令</a>
+        <a href="#tabs-syntax" class="nav-link" data-section="tabs-syntax">Tabs 标签页</a>
+      </div>
+      <!-- 实战 -->
+      <div class="sidebar-group" data-for-tab="practice">
+        <div class="nav-group-title">实战工具</div>
+        <a href="#playground" class="nav-link" data-section="playground">在线练习场</a>
+        <a href="#cheatsheet" class="nav-link" data-section="cheatsheet">速查表</a>
+      </div>
+      <div class="sidebar-group" data-for-tab="skill">
+        <div class="nav-group-title">Skill 模板</div>
+        <a href="#skill-intro" class="nav-link" data-section="skill-intro">什么是 Skill</a>
+        <a href="#skill-beginner" class="nav-link" data-section="skill-beginner">初级模板</a>
+        <a href="#skill-intermediate" class="nav-link" data-section="skill-intermediate">中级模板</a>
+        <a href="#skill-advanced" class="nav-link" data-section="skill-advanced">高级模板</a>
+        <a href="#skill-tips" class="nav-link" data-section="skill-tips">编写技巧</a>
+        <a href="#skill-platforms" class="nav-link" data-section="skill-platforms">平台对比</a>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- 主内容 -->
+  <main class="main">
+    <!-- 标签栏 -->
+    <div class="tabs-bar" id="tabsBar">
+      <button class="tab-btn active" data-tab="intro">快速入门</button>
+      <button class="tab-btn" data-tab="basic">基础语法<span class="tab-count">9</span></button>
+      <button class="tab-btn" data-tab="extended">扩展语法<span class="tab-count">11</span></button>
+      <button class="tab-btn" data-tab="advanced">高级技巧<span class="tab-count">9</span></button>
+      <button class="tab-btn" data-tab="practice">实战工具</button>
+      <button class="tab-btn" data-tab="skill">Skill 模板<span class="tab-count">🤖</span></button>
+    </div>
+
+    <div class="tab-content-area">
+
+      <!-- ============================== TAB: 快速入门 ============================== -->
+      <div class="tab-panel active" data-tab-panel="intro">
+        <div class="intro-hero">
+          <h1>什么是 Markdown？</h1>
+          <p class="intro-subtitle">Markdown 是一种<strong>轻量级标记语言</strong>，由 John Gruber 于 2004 年创建。它让你用简单的纯文本格式编写文档，然后转换成结构化的 HTML。</p>
+          <div class="intro-stats">
+            <div class="stat-item"><span class="stat-num">32</span><span class="stat-label">语法要点</span></div>
+            <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">主题模式</span></div>
+            <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">实时练习</span></div>
+          </div>
+        </div>
+        <div class="intro-cards">
+          <div class="intro-card">
+            <div class="intro-card-icon">✏️</div>
+            <h3>简单易学</h3>
+            <p>语法规则不超过 10 分钟即可掌握，纯文本书写不依赖特定软件。</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">🌍</div>
+            <h3>用途广泛</h3>
+            <p>GitHub、博客、笔记软件、技术文档、README 文件都在使用 Markdown。</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">🤖</div>
+            <h3>AI 时代必备</h3>
+            <p>AI 对话、Prompt 工程、Skill 文件、Agent 配置大量使用 Markdown 格式。</p>
+          </div>
+          <div class="intro-card">
+            <div class="intro-card-icon">🎯</div>
+            <h3>专注内容</h3>
+            <p>不用在格式上花时间，写出的文档可以轻松转换为 HTML、PDF 等格式。</p>
+          </div>
+        </div>
+        <div class="callout callout-info" id="intro-what">
+          <div class="callout-title">💡 如何使用本教程</div>
+          <p>点击上方标签切换分类，每个语法点可以展开/收起。左侧导航栏可以快速跳转。</p>
+          <p>Markdown 文件通常以 <code>.md</code> 或 <code>.markdown</code> 为扩展名。建议切换到「实战工具」标签，边学边在练习场中动手试试！</p>
+        </div>
+      </div>
+
+      <!-- ============================== TAB: 基础语法 ============================== -->
+      <div class="tab-panel" data-tab-panel="basic">
+
+        <!-- 标题 -->
+        <div class="accordion-item" id="headings">
+          <button class="accordion-trigger" aria-expanded="true">
+            <span class="trigger-left"><span class="trigger-badge">H</span>标题</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content open">
+            <p>使用 <code>#</code> 号创建标题，1~6 个 <code>#</code> 对应一到六级标题。<code>#</code> 和文字之间需要一个空格。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="headings-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="headings-code"># 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <h1 style="font-size:1.8em;margin:0;padding:0;border:none;">一级标题</h1>
+                  <h2 style="font-size:1.5em;margin:0;padding:0;border:none;">二级标题</h2>
+                  <h3 style="font-size:1.25em;margin:0;padding:0;">三级标题</h3>
+                  <h4 style="font-size:1.1em;margin:0;padding:0;">四级标题</h4>
+                  <h5 style="font-size:1em;margin:0;padding:0;">五级标题</h5>
+                  <h6 style="font-size:.9em;margin:0;padding:0;">六级标题</h6>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 小贴士</div><p>一般文章最多用到三级标题即可。<code>#</code> 后面一定要加空格。另外也可以用 <code>===</code> 和 <code>---</code> 在文字下方来表示一级和二级标题（不推荐）。</p></div>
+          </div>
+        </div>
+
+        <!-- 段落与换行 -->
+        <div class="accordion-item" id="paragraphs">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">¶</span>段落与换行</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>段落之间用<strong>空行</strong>分隔。段落内换行：行尾加<strong>两个空格</strong>后回车，或使用 <code>&lt;br&gt;</code>。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="p-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="p-code">这是第一个段落。
+
+这是第二个段落。
+
+这一行末尾有两个空格  
+所以这里会换行。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>这是第一个段落。</p><p>这是第二个段落。</p><p>这一行末尾有两个空格<br>所以这里会换行。</p>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 注意</div><p>只是简单回车（不加空行）在大多数渲染器中不会换行。需要空行创建新段落，或行尾两个空格软换行。</p></div>
+          </div>
+        </div>
+
+        <!-- 粗体与斜体 -->
+        <div class="accordion-item" id="emphasis">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">B</span>粗体与斜体</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>用星号 <code>*</code> 或下划线 <code>_</code> 包裹文本来添加强调。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="em-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="em-code">*斜体* 或 _斜体_
+**粗体** 或 __粗体__
+***粗斜体*** 或 ___粗斜体___
+这是 **重点** 和 *强调*</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p><em>斜体</em> 或 <em>斜体</em></p><p><strong>粗体</strong> 或 <strong>粗体</strong></p><p><strong><em>粗斜体</em></strong> 或 <strong><em>粗斜体</em></strong></p><p>这是 <strong>重点</strong> 和 <em>强调</em></p>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 小贴士</div><p>推荐统一用星号 <code>*</code>，兼容性更好，在单词中间也能正常使用。</p></div>
+          </div>
+        </div>
+
+        <!-- 引用 -->
+        <div class="accordion-item" id="blockquotes">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">"</span>引用</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>使用 <code>&gt;</code> 创建引用块，可嵌套，内部可包含其他 Markdown 元素。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="bq-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="bq-code">&gt; 这是一个引用块。
+&gt; 可以跨多行。
+
+&gt; 引用中可以有 **粗体**。
+&gt;
+&gt; &gt; 嵌套的引用。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <blockquote><p>这是一个引用块。可以跨多行。</p></blockquote>
+                  <blockquote><p>引用中可以有 <strong>粗体</strong>。</p><blockquote><p>嵌套的引用。</p></blockquote></blockquote>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 列表 -->
+        <div class="accordion-item" id="lists">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">≡</span>列表</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>支持<strong>无序列表</strong>（<code>-</code>/<code>*</code>/<code>+</code>）和<strong>有序列表</strong>（<code>1.</code>），可嵌套。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 无序列表</span><button class="copy-btn" data-target="ul-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="ul-code">- 苹果
+- 香蕉
+  - 蜜橘
+  - 脐橙
+- 葡萄</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <ul><li>苹果</li><li>香蕉<ul><li>蜜橘</li><li>脐橙</li></ul></li><li>葡萄</li></ul>
+                </div></div>
+              </div>
+            </div>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 有序列表</span><button class="copy-btn" data-target="ol-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="ol-code">1. 第一步
+2. 第二步
+   1. 子步骤 a
+   2. 子步骤 b
+3. 第三步</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <ol><li>第一步</li><li>第二步<ol><li>子步骤 a</li><li>子步骤 b</li></ol></li><li>第三步</li></ol>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 小贴士</div><p>嵌套列表缩进 2~4 个空格。有序列表数字不必按序，但建议按序编号。</p></div>
+          </div>
+        </div>
+
+        <!-- 代码 -->
+        <div class="accordion-item" id="code">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">&lt;/&gt;</span>代码</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>反引号 <code>`</code> 包裹行内代码，三个反引号 <code>```</code> 创建代码块（可指定语言）。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 行内 + 代码块</span><button class="copy-btn" data-target="code-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="code-code">行内代码：`console.log("hi")`
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+```</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>行内代码：<code>console.log("hi")</code></p>
+                  <pre class="code-rendered"><code><span class="kw">function</span> <span class="fn">greet</span>(name) {
+  <span class="kw">return</span> <span class="str">`Hello, ${name}!`</span>;
+}</code></pre>
+                  <pre class="code-rendered"><code><span class="kw">def</span> <span class="fn">greet</span>(name):
+    <span class="kw">return</span> <span class="str">f"Hello, {name}!"</span></code></pre>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-info"><div class="callout-title">💡 常用语言标识</div><p><code>javascript</code> <code>python</code> <code>java</code> <code>html</code> <code>css</code> <code>bash</code> <code>json</code> <code>sql</code> <code>go</code> <code>rust</code> <code>typescript</code> <code>c</code> <code>cpp</code></p></div>
+          </div>
+        </div>
+
+        <!-- 链接 -->
+        <div class="accordion-item" id="links">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">🔗</span>链接</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>Markdown 支持多种链接写法。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="link-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="link-code">[普通链接](https://example.com)
+
+[带标题](https://example.com "悬停提示")
+
+[引用式链接][link-id]
+
+[link-id]: https://example.com "标题"</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p><a href="#" class="demo-link">普通链接</a></p>
+                  <p><a href="#" class="demo-link" title="悬停提示">带标题</a></p>
+                  <p><a href="#" class="demo-link">引用式链接</a></p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">引用式适合多次使用同一链接，集中管理 URL。</p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 图片 -->
+        <div class="accordion-item" id="images">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">📷</span>图片</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>图片语法同链接，前面加 <code>!</code>。方括号内是替代文本（alt）。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="img-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="img-code">![替代文本](图片URL)
+
+![风景](https://example.com/photo.jpg "标题")
+
+[![可点击图片](图片URL)](链接URL)</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="image-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>图片将显示在此处</span></div>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">调整大小可用 HTML：<code>&lt;img src="url" width="300"&gt;</code></p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 分割线 -->
+        <div class="accordion-item" id="hr">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">—</span>分割线</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>三个或更多 <code>-</code>、<code>*</code> 或 <code>_</code> 创建分割线。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="hr-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="hr-code">上面的内容
+
+---
+
+下面的内容
+
+***</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>上面的内容</p><hr><p>下面的内容</p><hr>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== TAB: 扩展语法 ============================== -->
+      <div class="tab-panel" data-tab-panel="extended">
+
+        <!-- 表格 -->
+        <div class="accordion-item" id="tables">
+          <button class="accordion-trigger" aria-expanded="true"><span class="trigger-left"><span class="trigger-badge">▦</span>表格</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content open">
+            <p>用 <code>|</code> 分隔列，<code>-</code> 分隔表头。<code>:---</code> 左对齐，<code>:---:</code> 居中，<code>---:</code> 右对齐。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="tbl-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="tbl-code">| 左对齐   | 居中对齐    | 右对齐     |
+| :------- | :---------: | ---------: |
+| 单元格   | 单元格      | 单元格     |
+| 左       | 中          | 右         |</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <table><thead><tr><th style="text-align:left">左对齐</th><th style="text-align:center">居中对齐</th><th style="text-align:right">右对齐</th></tr></thead><tbody><tr><td style="text-align:left">单元格</td><td style="text-align:center">单元格</td><td style="text-align:right">单元格</td></tr><tr><td style="text-align:left">左</td><td style="text-align:center">中</td><td style="text-align:right">右</td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 任务列表 -->
+        <div class="accordion-item" id="tasklists">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">☑</span>任务列表</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p><code>- [ ]</code> 未完成，<code>- [x]</code> 已完成。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="task-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="task-code">- [x] 学习标题语法
+- [x] 学习粗体和斜体
+- [ ] 学习代码块
+- [ ] 完成在线练习</code></pre></div>
+                <div class="example-render"><div class="rendered"><ul class="task-list"><li><input type="checkbox" checked disabled> 学习标题语法</li><li><input type="checkbox" checked disabled> 学习粗体和斜体</li><li><input type="checkbox" disabled> 学习代码块</li><li><input type="checkbox" disabled> 完成在线练习</li></ul></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 删除线 -->
+        <div class="accordion-item" id="strikethrough">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">S̶</span>删除线</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>两个波浪号 <code>~~</code> 包裹文本。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="del-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="del-code">~~已删除的文本~~
+
+价格：~~￥99~~ ￥49</code></pre></div>
+                <div class="example-render"><div class="rendered"><p><del>已删除的文本</del></p><p>价格：<del>￥99</del> ￥49</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 脚注 -->
+        <div class="accordion-item" id="footnotes">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">※</span>脚注</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>正文用 <code>[^标记]</code> 引用，文末用 <code>[^标记]: 内容</code> 定义脚注。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="fn-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="fn-code">Markdown 很流行[^1]。
+
+它被广泛使用[^note]。
+
+[^1]: 由 John Gruber 于 2004 年创建。
+[^note]: GitHub、Reddit 等平台均支持。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>Markdown 很流行<sup><a href="#" class="demo-link">[1]</a></sup>。</p>
+                  <p>它被广泛使用<sup><a href="#" class="demo-link">[2]</a></sup>。</p>
+                  <hr style="margin:.8em 0"><ol style="font-size:.85em;color:var(--text-secondary)"><li>由 John Gruber 于 2004 年创建。</li><li>GitHub、Reddit 等平台均支持。</li></ol>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>脚注为扩展语法，GitHub 支持，但部分简单渲染器可能不支持。</p></div>
+          </div>
+        </div>
+
+        <!-- 自动链接 -->
+        <div class="accordion-item" id="autolinks">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">↗</span>自动链接</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>GFM（GitHub Flavored Markdown）会自动将 URL 和邮箱转为可点击链接。也可以用尖括号显式标记。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="autolink-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="autolink-code">https://example.com
+
+&lt;https://example.com&gt;
+
+&lt;user@example.com&gt;
+
+直接粘贴的URL也会自动变成链接</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p><a href="#" class="demo-link">https://example.com</a></p>
+                  <p><a href="#" class="demo-link">https://example.com</a></p>
+                  <p><a href="#" class="demo-link">user@example.com</a></p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">GFM 环境下 URL 会自动转换</p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Emoji -->
+        <div class="accordion-item" id="emoji">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">😊</span>Emoji 表情</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>两种方式：直接输入 Unicode emoji，或使用 <code>:shortcode:</code> 简码（GitHub 等平台支持）。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="emoji-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="emoji-code">直接输入：🎉 🚀 ❤️ ✅
+
+简码形式：
+:smile: :heart: :thumbsup:
+:rocket: :star: :warning:
+:white_check_mark: :x:</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>直接输入：🎉 🚀 ❤️ ✅</p>
+                  <p>简码渲染：<br>😄 ❤️ 👍<br>🚀 ⭐ ⚠️<br>✅ ❌</p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">完整列表可参考 <a href="#" class="demo-link">emoji-cheat-sheet</a></p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 高亮 -->
+        <div class="accordion-item" id="highlight">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge" style="background:#fef08a;color:#854d0e">Hi</span>高亮标记</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>双等号 <code>==</code> 包裹文本创建高亮效果。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="hl-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="hl-code">这是 ==非常重要== 的内容。
+
+==高亮标记== 可以突出关键信息。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>这是 <mark>非常重要</mark> 的内容。</p>
+                  <p><mark>高亮标记</mark> 可以突出关键信息。</p>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>高亮语法在 Typora、Obsidian 等编辑器中支持，GitHub 标准不支持。可用 HTML <code>&lt;mark&gt;</code> 标签替代。</p></div>
+          </div>
+        </div>
+
+        <!-- 上标下标 -->
+        <div class="accordion-item" id="sup-sub">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">X²</span>上标与下标</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>部分解析器支持 <code>^上标^</code> 和 <code>~下标~</code>，通用方案是使用 HTML 标签。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="ss-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="ss-code">扩展语法：X^2^ 和 H~2~O
+
+HTML 方式（通用）：
+X&lt;sup&gt;2&lt;/sup&gt; 和 H&lt;sub&gt;2&lt;/sub&gt;O</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>扩展语法：X<sup>2</sup> 和 H<sub>2</sub>O</p>
+                  <p>HTML 方式（通用）：<br>X<sup>2</sup> 和 H<sub>2</sub>O</p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 定义列表 -->
+        <div class="accordion-item" id="deflist">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">DL</span>定义列表</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>术语后换行，以 <code>:</code> 加空格开头写定义。（PHP Markdown Extra 扩展）</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="dl-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="dl-code">Markdown
+: 一种轻量级标记语言
+
+HTML
+: 超文本标记语言
+: 网页的基础结构语言</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <dl><dt><strong>Markdown</strong></dt><dd>一种轻量级标记语言</dd><dt><strong>HTML</strong></dt><dd>超文本标记语言</dd><dd>网页的基础结构语言</dd></dl>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>定义列表不是标准 Markdown 语法，GitHub 不支持。Typora、Pandoc、PHP Markdown Extra 支持。</p></div>
+          </div>
+        </div>
+
+        <!-- 缩写 -->
+        <div class="accordion-item" id="abbreviation">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">Ab</span>缩写</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>定义缩写后，正文中出现的缩写词会自动带有悬停提示。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="abbr-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="abbr-code">*[HTML]: HyperText Markup Language
+*[CSS]: Cascading Style Sheets
+
+HTML 和 CSS 是网页开发的基础。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p><abbr title="HyperText Markup Language">HTML</abbr> 和 <abbr title="Cascading Style Sheets">CSS</abbr> 是网页开发的基础。</p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">鼠标悬停在缩写上可以看到全称 ↑</p>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>缩写是 PHP Markdown Extra 扩展，GitHub 不支持。</p></div>
+          </div>
+        </div>
+
+        <!-- 注释 -->
+        <div class="accordion-item" id="comments">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">&lt;!&gt;</span>注释</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>HTML 注释语法在 Markdown 中同样有效，内容不会被渲染显示。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="comment-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="comment-code">可见的文本
+
+&lt;!-- 这是注释，不会显示 --&gt;
+
+&lt;!--
+  多行注释
+  也是可以的
+--&gt;
+
+还有一种写法：
+[//]: # (这也是注释)</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>可见的文本</p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">（注释部分不会显示任何内容）</p>
+                  <p style="font-size:.85em;color:var(--text-tertiary)"><code>[//]: #</code> 是纯 Markdown 的注释写法，兼容性更好。</p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== TAB: 高级技巧 ============================== -->
+      <div class="tab-panel" data-tab-panel="advanced">
+
+        <!-- 转义字符 -->
+        <div class="accordion-item" id="escape">
+          <button class="accordion-trigger" aria-expanded="true"><span class="trigger-left"><span class="trigger-badge">\</span>转义字符</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content open">
+            <p>反斜杠 <code>\</code> 可以转义 Markdown 的特殊字符，让它们按原样显示。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="esc-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="esc-code">\*不是斜体\*
+\# 不是标题
+\[不是链接\](url)
+
+可转义字符：
+\\ \` \* \_ \{ \} \[ \] \( \) \# \+ \- \. \! \|</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>*不是斜体*</p><p># 不是标题</p><p>[不是链接](url)</p>
+                  <p>可转义字符：<br>\ ` * _ { } [ ] ( ) # + - . ! |</p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HTML 混用 -->
+        <div class="accordion-item" id="html-in-md">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">&lt;/&gt;</span>HTML 混用</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>大多数渲染器允许直接嵌入 HTML 标签，弥补 Markdown 语法的不足。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="html-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="html-code">&lt;div align="center"&gt;
+  &lt;h3&gt;居中标题&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;details&gt;
+  &lt;summary&gt;点击展开&lt;/summary&gt;
+  隐藏的内容
+&lt;/details&gt;
+
+&lt;kbd&gt;Ctrl&lt;/kbd&gt; + &lt;kbd&gt;C&lt;/kbd&gt;
+
+X&lt;sup&gt;2&lt;/sup&gt; H&lt;sub&gt;2&lt;/sub&gt;O
+
+&lt;mark&gt;高亮文本&lt;/mark&gt;</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div style="text-align:center"><h3 style="margin:0;font-size:1.2em;">居中标题</h3></div>
+                  <details style="margin:.5em 0;padding:.5em;border:1px solid var(--border);border-radius:6px;"><summary style="cursor:pointer;font-weight:500">点击展开</summary><p style="margin:.5em 0 0">隐藏的内容</p></details>
+                  <p><kbd>Ctrl</kbd> + <kbd>C</kbd></p>
+                  <p>X<sup>2</sup> H<sub>2</sub>O</p>
+                  <p><mark>高亮文本</mark></p>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 数学公式 -->
+        <div class="accordion-item" id="math">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">∑</span>数学公式</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>用 <code>$</code> 包裹行内公式，<code>$$</code> 包裹块级公式（LaTeX 语法）。GitHub、Typora、Obsidian 均支持。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="math-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="math-code">行内公式：$E = mc^2$
+
+块级公式：
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+$$
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi}\sigma}
+  e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+$$</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>行内公式：<em style="font-style:italic">E = mc²</em></p>
+                  <div style="text-align:center;padding:1em;background:var(--bg-tertiary);border-radius:8px;margin:.5em 0;font-family:serif;font-size:1.1em;">∑<sub>i=1</sub><sup>n</sup> x<sub>i</sub> = x<sub>1</sub> + x<sub>2</sub> + ⋯ + x<sub>n</sub></div>
+                  <div style="text-align:center;padding:1em;background:var(--bg-tertiary);border-radius:8px;margin:.5em 0;font-family:serif;font-size:1.1em;">f(x) = (1 / √2πσ) · e<sup>−(x−μ)²/2σ²</sup></div>
+                  <p style="font-size:.85em;color:var(--text-tertiary)">实际渲染需要 KaTeX 或 MathJax 支持</p>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-info"><div class="callout-title">💡 常用 LaTeX 符号</div><p><code>\frac{a}{b}</code> 分数 · <code>\sqrt{x}</code> 根号 · <code>\sum</code> 求和 · <code>\int</code> 积分 · <code>\alpha \beta \gamma</code> 希腊字母 · <code>\leq \geq \neq</code> 比较符号</p></div>
+          </div>
+        </div>
+
+        <!-- 目录 -->
+        <div class="accordion-item" id="toc">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">📑</span>目录生成</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>在文档中插入 <code>[TOC]</code> 可自动根据标题生成目录。不同平台语法略有不同。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="toc-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="toc-code">[TOC]
+
+# 第一章
+## 1.1 简介
+## 1.2 安装
+# 第二章
+## 2.1 基础
+## 2.2 进阶
+
+---
+其他平台写法：
+[[toc]]          (VuePress)
+{:toc}           (Jekyll)
+<!-- toc -->      (一些插件)</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p style="font-weight:600">目录</p>
+                  <ul style="font-size:.9em">
+                    <li><a href="#" class="demo-link">第一章</a>
+                      <ul><li><a href="#" class="demo-link">1.1 简介</a></li><li><a href="#" class="demo-link">1.2 安装</a></li></ul>
+                    </li>
+                    <li><a href="#" class="demo-link">第二章</a>
+                      <ul><li><a href="#" class="demo-link">2.1 基础</a></li><li><a href="#" class="demo-link">2.2 进阶</a></li></ul>
+                    </li>
+                  </ul>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>GitHub 不支持 <code>[TOC]</code>，需手动编写目录或使用第三方工具生成。Typora、GitBook 原生支持。</p></div>
+          </div>
+        </div>
+
+        <!-- 锚点跳转 -->
+        <div class="accordion-item" id="anchors">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">⚓</span>锚点跳转</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>标题会自动生成 ID 锚点，可以用链接语法跳转到页内某个位置。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="anchor-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="anchor-code">## 我的标题
+
+跳转到 [我的标题](#我的标题)
+
+---
+GitHub 的 ID 生成规则：
+- 转为小写
+- 空格变 -
+- 去除特殊字符
+- 中文保留
+
+## Hello World
+→ 锚点为 #hello-world
+
+## 安装指南
+→ 锚点为 #安装指南</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p>点击 <a href="#" class="demo-link">我的标题</a> 可跳转到对应标题位置。</p>
+                  <p style="font-size:.9em">生成规则示例：</p>
+                  <table style="font-size:.85em"><thead><tr><th>标题</th><th>锚点 ID</th></tr></thead><tbody><tr><td><code>## Hello World</code></td><td><code>#hello-world</code></td></tr><tr><td><code>## 安装指南</code></td><td><code>#安装指南</code></td></tr><tr><td><code>## C++ 入门</code></td><td><code>#c-入门</code></td></tr></tbody></table>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub Alerts -->
+        <div class="accordion-item" id="alerts">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">!</span>提示框 (Alerts)</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>GitHub 支持的 Alerts 语法，在引用块中使用 <code>[!TYPE]</code> 创建不同类型的提示框。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 示例</span><button class="copy-btn" data-target="alert-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="alert-code">&gt; [!NOTE]
+&gt; 这是一条备注信息。
+
+&gt; [!TIP]
+&gt; 这是一条实用提示。
+
+&gt; [!IMPORTANT]
+&gt; 这是重要信息。
+
+&gt; [!WARNING]
+&gt; 这是警告信息。
+
+&gt; [!CAUTION]
+&gt; 这是危险警告。</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="gh-alert gh-note"><strong>📝 Note</strong><br>这是一条备注信息。</div>
+                  <div class="gh-alert gh-tip"><strong>💡 Tip</strong><br>这是一条实用提示。</div>
+                  <div class="gh-alert gh-important"><strong>❗ Important</strong><br>这是重要信息。</div>
+                  <div class="gh-alert gh-warning"><strong>⚠️ Warning</strong><br>这是警告信息。</div>
+                  <div class="gh-alert gh-caution"><strong>🔴 Caution</strong><br>这是危险警告。</div>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-info"><div class="callout-title">💡 适用场景</div><p>GitHub 的 README、Issues、Discussions、PR 描述中都可以使用。非常适合开源项目文档。</p></div>
+          </div>
+        </div>
+
+        <!-- Mermaid -->
+        <div class="accordion-item" id="mermaid">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">◇</span>Mermaid 图表</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>在代码块中使用 <code>mermaid</code> 语言标识，可以用文字描述生成流程图、时序图等。GitHub 原生支持。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 流程图</span><button class="copy-btn" data-target="mermaid1-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="mermaid1-code">```mermaid
+graph TD
+    A[开始] --&gt; B{条件判断}
+    B --&gt;|是| C[执行操作]
+    B --&gt;|否| D[跳过]
+    C --&gt; E[结束]
+    D --&gt; E
+```</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="mermaid-preview">
+                    <div class="mermaid-node mermaid-start">开始</div>
+                    <div class="mermaid-arrow">↓</div>
+                    <div class="mermaid-node mermaid-decision">条件判断?</div>
+                    <div class="mermaid-branch"><span class="mermaid-yes">是 → 执行操作</span><span class="mermaid-no">否 → 跳过</span></div>
+                    <div class="mermaid-arrow">↓</div>
+                    <div class="mermaid-node mermaid-end">结束</div>
+                  </div>
+                </div></div>
+              </div>
+            </div>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 时序图 & 饼图</span><button class="copy-btn" data-target="mermaid2-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="mermaid2-code">```mermaid
+sequenceDiagram
+    客户端->>服务器: 请求数据
+    服务器-->>客户端: 返回响应
+```
+
+```mermaid
+pie title 使用场景
+    "技术文档" : 40
+    "博客写作" : 25
+    "笔记记录" : 20
+    "AI交互" : 15
+```</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p style="font-size:.9em">Mermaid 支持的图表类型：</p>
+                  <ul style="font-size:.88em"><li><strong>flowchart</strong> — 流程图</li><li><strong>sequenceDiagram</strong> — 时序图</li><li><strong>classDiagram</strong> — 类图</li><li><strong>stateDiagram</strong> — 状态图</li><li><strong>gantt</strong> — 甘特图</li><li><strong>pie</strong> — 饼图</li><li><strong>gitgraph</strong> — Git 分支图</li></ul>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 容器指令 -->
+        <div class="accordion-item" id="containers">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">:::</span>容器指令</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>使用 <code>:::</code>（三个冒号）创建自定义容器块，常见于 VuePress、VitePress、MkDocs 等文档框架。基于 <code>markdown-it-container</code> 插件。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 提示容器</span><button class="copy-btn" data-target="container-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="container-code">::: tip 小贴士
+这里是提示内容。
+:::
+
+::: warning 注意
+这里是警告内容。
+:::
+
+::: danger 危险
+这里是危险警告。
+:::
+
+::: details 点击查看详情
+这里是可折叠的隐藏内容。
+支持 **Markdown** 格式。
+:::
+
+::: info
+不写标题则使用默认标题。
+:::</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="container-demo container-tip"><div class="container-title">💡 小贴士</div><p>这里是提示内容。</p></div>
+                  <div class="container-demo container-warning"><div class="container-title">⚠️ 注意</div><p>这里是警告内容。</p></div>
+                  <div class="container-demo container-danger"><div class="container-title">🔴 危险</div><p>这里是危险警告。</p></div>
+                  <details class="container-demo container-details"><summary>点击查看详情</summary><p>这里是可折叠的隐藏内容。<br>支持 <strong>Markdown</strong> 格式。</p></details>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-info"><div class="callout-title">💡 适用平台</div><p>VuePress、VitePress、MkDocs Material（使用 <code>!!!</code> 语法）、Docusaurus（使用 <code>:::</code> 语法）。不同框架关键词略有差异。</p></div>
+          </div>
+        </div>
+
+        <!-- Tabs 标签页 -->
+        <div class="accordion-item" id="tabs-syntax">
+          <button class="accordion-trigger"><span class="trigger-left"><span class="trigger-badge">⊞</span>Tabs 标签页</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="accordion-content">
+            <p>Tabs 语法允许将内容组织为可切换的标签页，基于 <code>markdown-it-container</code> + <code>markdown-it-tabs</code> 插件。不同框架语法有差异。</p>
+            <h3 style="padding-left:1rem;padding-right:1rem;margin:0.75rem 0 0.5rem;font-size:1rem;">VuePress / VitePress 语法</h3>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 code-tabs 示例</span><button class="copy-btn" data-target="tabs-vp-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="tabs-vp-code">:::: tabs
+
+@tab JavaScript
+```js
+console.log("Hello");
+```
+
+@tab Python
+```python
+print("Hello")
+```
+
+@tab Go
+```go
+fmt.Println("Hello")
+```
+
+::::</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="tabs-demo">
+                    <div class="tabs-demo-bar">
+                      <span class="tabs-demo-tab active">JavaScript</span>
+                      <span class="tabs-demo-tab">Python</span>
+                      <span class="tabs-demo-tab">Go</span>
+                    </div>
+                    <pre class="code-rendered"><code><span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello"</span>);</code></pre>
+                  </div>
+                </div></div>
+              </div>
+            </div>
+            <h3 style="padding-left:1rem;padding-right:1rem;margin:0.75rem 0 0.5rem;font-size:1rem;">MkDocs Material 语法</h3>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 MkDocs 风格</span><button class="copy-btn" data-target="tabs-mkdocs-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="tabs-mkdocs-code">=== "npm"
+
+    ```bash
+    npm install package-name
+    ```
+
+=== "yarn"
+
+    ```bash
+    yarn add package-name
+    ```
+
+=== "pnpm"
+
+    ```bash
+    pnpm add package-name
+    ```</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <div class="tabs-demo">
+                    <div class="tabs-demo-bar">
+                      <span class="tabs-demo-tab active">npm</span>
+                      <span class="tabs-demo-tab">yarn</span>
+                      <span class="tabs-demo-tab">pnpm</span>
+                    </div>
+                    <pre class="code-rendered"><code>npm install package-name</code></pre>
+                  </div>
+                </div></div>
+              </div>
+            </div>
+            <h3 style="padding-left:1rem;padding-right:1rem;margin:0.75rem 0 0.5rem;font-size:1rem;">Docusaurus 语法</h3>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 Docusaurus 风格</span><button class="copy-btn" data-target="tabs-docusaurus-code">复制</button></div>
+              <div class="example-body">
+                <div class="example-source"><pre><code id="tabs-docusaurus-code">import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+&lt;Tabs&gt;
+  &lt;TabItem value="js" label="JavaScript"&gt;
+
+  ```js
+  console.log("Hello");
+  ```
+
+  &lt;/TabItem&gt;
+  &lt;TabItem value="py" label="Python"&gt;
+
+  ```python
+  print("Hello")
+  ```
+
+  &lt;/TabItem&gt;
+&lt;/Tabs&gt;</code></pre></div>
+                <div class="example-render"><div class="rendered">
+                  <p style="font-size:.85em;color:var(--text-tertiary)">Docusaurus 使用 JSX 组件语法（MDX），需要导入 Tabs 组件。</p>
+                  <div class="tabs-demo">
+                    <div class="tabs-demo-bar">
+                      <span class="tabs-demo-tab active">JavaScript</span>
+                      <span class="tabs-demo-tab">Python</span>
+                    </div>
+                    <pre class="code-rendered"><code><span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Hello"</span>);</code></pre>
+                  </div>
+                </div></div>
+              </div>
+            </div>
+            <div class="callout callout-warning"><div class="callout-title">⚠️ 兼容性</div><p>Tabs 不是标准 Markdown 语法，需要特定框架或插件支持。各框架写法不同：</p>
+              <table style="width:100%;font-size:.85em;margin-top:.5em;border-collapse:collapse;">
+                <thead><tr><th style="text-align:left;padding:.3em .5em;border-bottom:1px solid var(--border)">框架</th><th style="text-align:left;padding:.3em .5em;border-bottom:1px solid var(--border)">语法关键词</th><th style="text-align:left;padding:.3em .5em;border-bottom:1px solid var(--border)">插件</th></tr></thead>
+                <tbody>
+                  <tr><td style="padding:.3em .5em">VuePress 2</td><td style="padding:.3em .5em"><code>:::: tabs</code> + <code>@tab</code></td><td style="padding:.3em .5em">vuepress-plugin-md-enhance</td></tr>
+                  <tr><td style="padding:.3em .5em">VitePress</td><td style="padding:.3em .5em">同上或自定义</td><td style="padding:.3em .5em">markdown-it-tabs</td></tr>
+                  <tr><td style="padding:.3em .5em">MkDocs Material</td><td style="padding:.3em .5em"><code>=== "Tab"</code></td><td style="padding:.3em .5em">内置 tabbed 扩展</td></tr>
+                  <tr><td style="padding:.3em .5em">Docusaurus</td><td style="padding:.3em .5em"><code>&lt;Tabs&gt;</code> JSX</td><td style="padding:.3em .5em">MDX 内置</td></tr>
+                  <tr><td style="padding:.3em .5em">Discourse 论坛</td><td style="padding:.3em .5em"><code>[tabs]</code> 或 <code>::: tabs</code></td><td style="padding:.3em .5em">markdown-it-container</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== TAB: 实战工具 ============================== -->
+      <div class="tab-panel" data-tab-panel="practice">
+
+        <!-- 练习场 -->
+        <div class="section" id="playground">
+          <h2>在线练习场</h2>
+          <p>左侧输入 Markdown 语法，右侧实时渲染。边学边练效果最好！</p>
+          <div class="playground-container">
+            <div class="playground-panel">
+              <div class="playground-panel-header">
+                <span class="playground-panel-label">✏️ 编辑区</span>
+                <button class="playground-clear" id="playgroundClear">清空</button>
+              </div>
+              <textarea class="playground-input" id="playgroundInput" spellcheck="false">## 欢迎来到练习场！ 🎉
+
+试着写一些 **Markdown** 吧：
+
+### 待办清单
+- [x] 阅读 Markdown 教程
+- [ ] 动手练习
+- [ ] 成为 Markdown 达人
+
+### 一段代码
+```javascript
+const greeting = "Hello, Markdown!";
+console.log(greeting);
+```
+
+> 💡 *纸上得来终觉浅，绝知此事要躬行。*
+
+---
+
+| 学习方法 | 效果 |
+| :------: | :--: |
+| 只看不练 | ⭐ |
+| 边看边练 | ⭐⭐⭐⭐⭐ |
+</textarea>
+            </div>
+            <div class="playground-panel">
+              <div class="playground-panel-header"><span class="playground-panel-label">👁️ 预览区</span></div>
+              <div class="playground-output" id="playgroundOutput"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 速查表 -->
+        <div class="section" id="cheatsheet">
+          <h2>速查表</h2>
+          <p>所有 Markdown 语法一览，建议收藏本页随时查阅。</p>
+          <div class="cheatsheet-grid">
+            <div class="cheatsheet-card"><h4>文本格式</h4><table class="cs-tbl"><tr><td><code>**粗体**</code></td><td><strong>粗体</strong></td></tr><tr><td><code>*斜体*</code></td><td><em>斜体</em></td></tr><tr><td><code>***粗斜体***</code></td><td><strong><em>粗斜体</em></strong></td></tr><tr><td><code>~~删除线~~</code></td><td><del>删除线</del></td></tr><tr><td><code>==高亮==</code></td><td><mark>高亮</mark></td></tr><tr><td><code>`行内代码`</code></td><td><code>行内代码</code></td></tr></table></div>
+            <div class="cheatsheet-card"><h4>标题</h4><table class="cs-tbl"><tr><td><code># H1</code></td><td>一级标题</td></tr><tr><td><code>## H2</code></td><td>二级标题</td></tr><tr><td><code>### H3</code></td><td>三级标题</td></tr><tr><td><code>#### H4</code></td><td>四级标题</td></tr><tr><td><code>##### H5</code></td><td>五级标题</td></tr><tr><td><code>###### H6</code></td><td>六级标题</td></tr></table></div>
+            <div class="cheatsheet-card"><h4>链接 & 图片</h4><table class="cs-tbl"><tr><td><code>[文字](url)</code></td><td>链接</td></tr><tr><td><code>![alt](url)</code></td><td>图片</td></tr><tr><td><code>&lt;url&gt;</code></td><td>自动链接</td></tr><tr><td><code>[^1]</code></td><td>脚注引用</td></tr><tr><td><code>[跳转](#id)</code></td><td>锚点跳转</td></tr></table></div>
+            <div class="cheatsheet-card"><h4>列表</h4><table class="cs-tbl"><tr><td><code>- 项目</code></td><td>无序列表</td></tr><tr><td><code>1. 项目</code></td><td>有序列表</td></tr><tr><td><code>- [ ] 待办</code></td><td>任务列表</td></tr><tr><td><code>- [x] 完成</code></td><td>已完成项</td></tr></table></div>
+            <div class="cheatsheet-card"><h4>块级元素</h4><table class="cs-tbl"><tr><td><code>&gt; 引用</code></td><td>引用块</td></tr><tr><td><code>---</code></td><td>分割线</td></tr><tr><td><code>| 表格 |</code></td><td>表格</td></tr><tr><td><code>```lang</code></td><td>代码块</td></tr><tr><td><code>[TOC]</code></td><td>目录</td></tr></table></div>
+            <div class="cheatsheet-card"><h4>高级</h4><table class="cs-tbl"><tr><td><code>$公式$</code></td><td>行内数学</td></tr><tr><td><code>$$公式$$</code></td><td>块级数学</td></tr><tr><td><code>:emoji:</code></td><td>Emoji</td></tr><tr><td><code>&gt; [!NOTE]</code></td><td>提示框</td></tr><tr><td><code>```mermaid</code></td><td>图表</td></tr><tr><td><code>&lt;!-- --&gt;</code></td><td>注释</td></tr><tr><td><code>::: tip</code></td><td>容器指令</td></tr><tr><td><code>:::: tabs</code></td><td>标签页</td></tr></table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== TAB: Skill 模板 ============================== -->
+      <div class="tab-panel" data-tab-panel="skill">
+
+        <!-- Skill 简介 -->
+        <div class="section" id="skill-intro">
+          <div class="intro-hero" style="padding-bottom:1rem">
+            <h1>AI Skill 模板指南</h1>
+            <p class="intro-subtitle">Skill（技能文件）是用 Markdown 编写的 AI 指令模板，用来定义 AI 助手的行为、能力和工作流程。<br>掌握 Markdown 语法后，你就可以编写自己的 Skill 文件了。</p>
+          </div>
+          <div class="intro-cards" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+            <div class="intro-card">
+              <div class="intro-card-icon">📄</div>
+              <h3>文件格式</h3>
+              <p>通常是 <code>SKILL.md</code> 或 <code>.md</code> 文件，纯 Markdown 语法编写。</p>
+            </div>
+            <div class="intro-card">
+              <div class="intro-card-icon">🎯</div>
+              <h3>核心目的</h3>
+              <p>告诉 AI「你是谁、能做什么、怎么做」，让 AI 按照预设的规则工作。</p>
+            </div>
+            <div class="intro-card">
+              <div class="intro-card-icon">🧩</div>
+              <h3>适用平台</h3>
+              <p>Cursor、GitHub Copilot、ChatGPT GPTs、Dify、Coze 等 AI 工具。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 初级模板 -->
+        <div class="accordion-item" id="skill-beginner">
+          <button class="accordion-trigger" aria-expanded="true">
+            <span class="trigger-left"><span class="trigger-badge skill-badge-beginner">初级</span>初级 Skill 模板</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content open">
+            <p>最基础的 Skill 结构，适合简单任务。包含<strong>角色定义</strong>、<strong>基本指令</strong>和<strong>输出格式</strong>三个核心部分。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 翻译助手 Skill</span><button class="copy-btn" data-target="skill-b-code">复制</button></div>
+              <div class="example-body" style="grid-template-columns:1fr">
+                <div class="example-source" style="border-right:none"><pre><code id="skill-b-code"># 翻译助手
+
+## 角色
+你是一个专业的中英文翻译助手。
+
+## 指令
+- 当用户输入中文时，翻译成英文
+- 当用户输入英文时，翻译成中文
+- 保持原文的语气和风格
+- 专有名词保留原文，括号内附上翻译
+
+## 输出格式
+**翻译结果：**
+
+（翻译内容）
+
+> 📝 *补充说明*：（如有需要解释的词汇或文化差异，在此说明）</code></pre></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 初级模板要点</div>
+              <ul>
+                <li><strong>结构清晰</strong> — 角色 + 指令 + 输出格式，三段式最基本</li>
+                <li><strong>指令具体</strong> — 用列表列出明确的规则，避免模糊表述</li>
+                <li><strong>格式统一</strong> — 定义好输出的格式模板，AI 会遵循</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 中级模板 -->
+        <div class="accordion-item" id="skill-intermediate">
+          <button class="accordion-trigger">
+            <span class="trigger-left"><span class="trigger-badge skill-badge-intermediate">中级</span>中级 Skill 模板</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content">
+            <p>中级模板增加了<strong>上下文约束</strong>、<strong>示例（Few-shot）</strong>、<strong>边界处理</strong>和<strong>工作流程</strong>，让 AI 表现更稳定。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 代码审查助手 Skill</span><button class="copy-btn" data-target="skill-m-code">复制</button></div>
+              <div class="example-body" style="grid-template-columns:1fr">
+                <div class="example-source" style="border-right:none"><pre><code id="skill-m-code"># 代码审查助手
+
+## 角色定义
+你是一位资深的代码审查工程师，擅长发现代码中的潜在问题并给出改进建议。
+
+## 能力范围
+- 支持语言：JavaScript、TypeScript、Python、Go、Java
+- 审查维度：安全性、性能、可读性、最佳实践、错误处理
+
+## 工作流程
+1. **理解代码**：先整体阅读代码，理解其功能和上下文
+2. **逐项审查**：按照审查维度逐一检查
+3. **分级反馈**：将问题按严重程度分级
+4. **给出建议**：每个问题附带具体的修改建议和代码示例
+
+## 输出格式
+
+### 📊 审查摘要
+| 维度     | 评分 (1-5) | 说明 |
+| -------- | ---------- | ---- |
+| 安全性   | ⭐⭐⭐⭐   | ... |
+| 性能     | ⭐⭐⭐     | ... |
+| 可读性   | ⭐⭐⭐⭐⭐ | ... |
+
+### 🔴 严重问题
+（需要立即修复的安全漏洞或 Bug）
+
+### 🟡 改进建议
+（性能优化、最佳实践等）
+
+### 🟢 亮点
+（写得好的地方，给予肯定）
+
+## 示例
+
+**用户输入：**
+```javascript
+app.get('/user', (req, res) =&gt; {
+  const id = req.query.id;
+  const result = db.query(`SELECT * FROM users WHERE id = ${id}`);
+  res.json(result);
+});
+```
+
+**审查输出：**
+
+### 🔴 严重问题
+**SQL 注入漏洞** — 直接拼接用户输入到 SQL 语句中。
+
+```javascript
+// ❌ 危险写法
+const result = db.query(`SELECT * FROM users WHERE id = ${id}`);
+
+// ✅ 安全写法 — 使用参数化查询
+const result = db.query('SELECT * FROM users WHERE id = ?', [id]);
+```
+
+## 约束
+- 不要重写整个代码，只针对问题给出最小改动
+- 如果代码没有问题，也要给出正面反馈
+- 保持专业但友好的语气</code></pre></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 中级模板要点</div>
+              <ul>
+                <li><strong>Few-shot 示例</strong> — 给 AI 一个输入→输出的完整示例，让它模仿</li>
+                <li><strong>工作流程</strong> — 定义步骤顺序，AI 会按流程执行</li>
+                <li><strong>分级输出</strong> — 用表格和分级标记组织结果，结构化更强</li>
+                <li><strong>边界约束</strong> — 告诉 AI「什么不要做」和「什么情况下怎么做」</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 高级模板 -->
+        <div class="accordion-item" id="skill-advanced">
+          <button class="accordion-trigger">
+            <span class="trigger-left"><span class="trigger-badge skill-badge-advanced">高级</span>高级 Skill 模板</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content">
+            <p>高级模板适合复杂场景，包含<strong>多阶段工作流</strong>、<strong>条件分支</strong>、<strong>工具调用</strong>、<strong>错误恢复</strong>和<strong>质量校验</strong>等完整体系。</p>
+            <div class="example-card">
+              <div class="example-header"><span class="example-label">📝 全栈项目脚手架 Skill</span><button class="copy-btn" data-target="skill-a-code">复制</button></div>
+              <div class="example-body" style="grid-template-columns:1fr">
+                <div class="example-source" style="border-right:none"><pre><code id="skill-a-code"># 全栈项目脚手架生成器
+
+## 元信息
+- **版本**：v2.1.0
+- **作者**：DevTeam
+- **适用平台**：Cursor Agent / GitHub Copilot Workspace
+- **最后更新**：2026-03
+
+## 角色定义
+
+你是一位全栈架构师 + 高级开发工程师。你的任务是根据用户的需求描述，
+生成一个**完整、可运行**的项目脚手架，包括目录结构、核心代码、
+配置文件和部署方案。
+
+## 前置条件检查
+
+在开始之前，你**必须**向用户确认以下信息（如果用户没有提供）：
+
+| 信息项   | 必填 | 默认值         | 示例              |
+| -------- | ---- | -------------- | ----------------- |
+| 项目名称 | ✅   | -              | my-awesome-app    |
+| 项目类型 | ✅   | -              | Web App / API / CLI |
+| 技术栈   | ❌   | 自动推荐       | React + Node.js   |
+| 部署方式 | ❌   | Cloudflare     | Vercel / Docker   |
+| 数据库   | ❌   | SQLite         | PostgreSQL / MongoDB |
+
+## 工作流程
+
+```
+用户输入需求
+    │
+    ▼
+[阶段 1] 需求分析 ──→ 输出：需求确认清单
+    │
+    ▼
+[阶段 2] 架构设计 ──→ 输出：技术方案 + 目录结构
+    │
+    ▼
+[阶段 3] 代码生成 ──→ 输出：核心文件代码
+    │
+    ▼
+[阶段 4] 配置完善 ──→ 输出：配置文件 + 环境变量
+    │
+    ▼
+[阶段 5] 质量校验 ──→ 自检清单
+    │
+    ▼
+交付用户
+```
+
+### 阶段 1：需求分析
+- 解析用户描述，提取功能需求
+- 如果需求模糊，列出 **最多 3 个** 澄清问题
+- 输出一个确认清单，等用户确认后再继续
+
+### 阶段 2：架构设计
+根据需求推荐技术栈，输出格式：
+
+&gt; **推荐方案：**
+&gt; - 前端：React 18 + TypeScript + Tailwind CSS
+&gt; - 后端：Hono + Cloudflare Workers
+&gt; - 数据库：D1 (SQLite)
+&gt; - 理由：（简述为什么选择这个方案）
+
+然后生成目录结构树：
+```
+project-name/
+├── src/
+│   ├── client/      # 前端代码
+│   ├── server/      # 后端代码
+│   └── shared/      # 共享类型和工具
+├── public/
+├── tests/
+├── package.json
+├── tsconfig.json
+├── wrangler.toml
+└── README.md
+```
+
+### 阶段 3：代码生成
+
+&gt; [!IMPORTANT]
+&gt; 每个文件必须是**完整可运行**的代码，不允许用注释占位。
+
+按以下优先级生成文件：
+1. 入口文件（index.ts / main.ts）
+2. 路由/页面文件
+3. 数据模型
+4. 工具函数
+5. 样式文件
+
+### 阶段 4：配置完善
+- `package.json`（含准确的依赖版本号）
+- 环境变量模板 `.env.example`
+- 部署配置文件
+- `README.md`（含启动步骤）
+
+### 阶段 5：质量自检
+
+生成完毕后，执行自检清单：
+
+- [ ] 所有 import 路径正确
+- [ ] 没有遗漏的依赖
+- [ ] TypeScript 类型完整
+- [ ] 环境变量已在 .env.example 中列出
+- [ ] README 包含完整启动步骤
+- [ ] 代码可以直接 `npm install &amp;&amp; npm run dev` 运行
+
+## 条件分支
+
+```
+IF 用户要求「仅前端」:
+  → 跳过后端和数据库阶段
+  → 推荐 Vite + 静态部署
+
+IF 用户要求「仅 API」:
+  → 跳过前端阶段
+  → 关注 API 文档和测试
+
+IF 用户没有指定技术栈:
+  → 根据项目类型自动推荐（见推荐矩阵）
+```
+
+## 推荐矩阵
+
+| 项目类型     | 前端            | 后端            | 数据库       | 部署         |
+| ------------ | --------------- | --------------- | ------------ | ------------ |
+| 展示型网站   | Astro           | -               | -            | CF Pages     |
+| Web 应用     | React + Vite    | Hono            | D1/Postgres  | CF Workers   |
+| API 服务     | -               | Hono / Express  | Postgres     | Docker       |
+| CLI 工具     | -               | Node.js         | SQLite       | npm publish  |
+| 移动端 H5    | Vue 3 + Vant    | Hono            | D1           | CF Workers   |
+
+## 错误处理
+- 如果生成过程中发现需求冲突，**立即暂停**并告知用户
+- 如果某个依赖版本不确定，标注 `<!-- TODO: 确认版本 -->`
+- 如果超出能力范围，诚实说明并推荐替代方案
+
+## 输出约束
+- 所有代码使用 **UTF-8** 编码
+- 代码风格遵循各语言社区主流规范
+- 单个文件不超过 **300 行**，超出则拆分
+- 注释语言跟随用户输入语言（中/英）
+- **不要** 生成无意义的占位代码或 Lorem ipsum</code></pre></div>
+              </div>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 高级模板要点</div>
+              <ul>
+                <li><strong>元信息</strong> — 版本、作者、适用平台，方便维护和协作</li>
+                <li><strong>前置条件</strong> — 用表格列出必要信息，缺失时主动询问</li>
+                <li><strong>多阶段工作流</strong> — 用流程图/步骤分解复杂任务，每阶段有明确输出</li>
+                <li><strong>条件分支</strong> — 处理不同场景的逻辑分支，让 Skill 更灵活</li>
+                <li><strong>质量自检</strong> — 用任务列表做自我检查，提高输出质量</li>
+                <li><strong>错误恢复</strong> — 定义异常情况的处理策略</li>
+                <li><strong>推荐矩阵</strong> — 用表格给出决策参考，减少 AI 的随机性</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 编写技巧 -->
+        <div class="accordion-item" id="skill-tips">
+          <button class="accordion-trigger">
+            <span class="trigger-left"><span class="trigger-badge">💡</span>Skill 编写技巧</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content">
+            <p>一些让你的 Skill 文件更有效的实用技巧。</p>
+            <div class="skill-tips-grid">
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">01</div>
+                <h4>用标题建立层次</h4>
+                <p>用 <code># ## ###</code> 建立清晰的文档结构，AI 会据此理解各部分的重要性和层级关系。</p>
+              </div>
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">02</div>
+                <h4>列表代替长段落</h4>
+                <p>指令用列表（<code>-</code> 或 <code>1.</code>）写，比大段文字更容易被 AI 准确理解和遵循。</p>
+              </div>
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">03</div>
+                <h4>给出具体示例</h4>
+                <p>一个好的示例（Few-shot）胜过十句描述。用代码块给出「输入→输出」的完整示例。</p>
+              </div>
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">04</div>
+                <h4>用表格做结构化约束</h4>
+                <p>参数表、对比矩阵、评分标准等用表格表示，比文字描述更精确，AI 遵循度更高。</p>
+              </div>
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">05</div>
+                <h4>定义「不要做什么」</h4>
+                <p>除了告诉 AI 要做什么，还要明确它<strong>不应该</strong>做什么。用 <code>&gt; [!WARNING]</code> 或加粗强调。</p>
+              </div>
+              <div class="skill-tip-card">
+                <div class="skill-tip-num">06</div>
+                <h4>版本化管理</h4>
+                <p>给 Skill 加上版本号和更新日期。迭代优化时对比历史版本，持续改进 AI 表现。</p>
+              </div>
+            </div>
+            <div class="callout callout-info"><div class="callout-title">💡 Markdown 语法在 Skill 中的妙用</div>
+              <table style="width:100%;font-size:.88em;border-collapse:collapse;margin-top:.5em">
+                <thead><tr><th style="text-align:left;padding:.4em .6em;border-bottom:2px solid var(--border)">Markdown 语法</th><th style="text-align:left;padding:.4em .6em;border-bottom:2px solid var(--border)">在 Skill 中的作用</th></tr></thead>
+                <tbody>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code># 标题</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">划分模块、建立层次结构</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>- 列表</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">列举规则、步骤和约束</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>**粗体**</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">强调关键词和必须遵守的规则</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>```代码块```</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">给出输入输出示例、模板格式</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>| 表格 |</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">参数定义、决策矩阵、评分标准</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>&gt; 引用</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">特别提醒、注意事项</td></tr>
+                  <tr><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)"><code>- [ ] 任务</code></td><td style="padding:.35em .6em;border-bottom:1px solid var(--border-light)">质量自检清单</td></tr>
+                  <tr><td style="padding:.35em .6em"><code>---</code></td><td style="padding:.35em .6em">分隔不同阶段或模块</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 平台对比 -->
+        <div class="accordion-item" id="skill-platforms">
+          <button class="accordion-trigger">
+            <span class="trigger-left"><span class="trigger-badge">🔄</span>平台 Skill 格式对比</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="accordion-content">
+            <p>不同 AI 平台的 Skill/Prompt 配置文件格式有所不同，但核心都是 Markdown。</p>
+            <div class="platform-table-wrap">
+              <table class="platform-table">
+                <thead>
+                  <tr>
+                    <th>平台</th>
+                    <th>文件名</th>
+                    <th>格式</th>
+                    <th>特点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Cursor</strong></td>
+                    <td><code>SKILL.md</code><br><code>.cursor/rules/*.md</code></td>
+                    <td>纯 Markdown</td>
+                    <td>支持 Agent Skill、Rule 规则，可绑定文件类型</td>
+                  </tr>
+                  <tr>
+                    <td><strong>GitHub Copilot</strong></td>
+                    <td><code>.github/copilot-instructions.md</code></td>
+                    <td>纯 Markdown</td>
+                    <td>项目级自定义指令，团队共享</td>
+                  </tr>
+                  <tr>
+                    <td><strong>ChatGPT GPTs</strong></td>
+                    <td>在线配置面板</td>
+                    <td>纯文本 (Markdown 可用)</td>
+                    <td>Instructions 字段支持 Markdown 排版</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Claude Projects</strong></td>
+                    <td>Project Instructions</td>
+                    <td>纯文本 (Markdown 可用)</td>
+                    <td>Custom Instructions 支持 Markdown</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dify</strong></td>
+                    <td>应用编排界面</td>
+                    <td>Markdown + YAML</td>
+                    <td>可视化编排 + Prompt 模板变量</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Coze</strong></td>
+                    <td>Bot 配置面板</td>
+                    <td>Markdown</td>
+                    <td>人设与回复逻辑、支持插件调用</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Windsurf</strong></td>
+                    <td><code>.windsurfrules</code></td>
+                    <td>纯 Markdown</td>
+                    <td>项目规则文件</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="callout callout-tip"><div class="callout-title">✅ 通用建议</div><p>不管哪个平台，<strong>Markdown 都是 Skill 编写的基础语言</strong>。掌握了前面教程中的标题、列表、表格、代码块、引用等语法，你就能在任何平台上编写高质量的 AI Skill。</p></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      <p>🐟 Fish Markdown — 让每个人都能轻松掌握 Markdown</p>
+    </footer>
+  </main>
+
+  <button class="scroll-top" id="scrollTop" aria-label="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
